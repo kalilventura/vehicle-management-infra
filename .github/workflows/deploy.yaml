@@ -30,7 +30,7 @@ jobs:
 
       - name: Terraform Format Check
         id: fmt
-        run: terraform fmt -check
+        run: terraform fmt -check -recursive
 
       - name: Terraform Validate
         id: validate
@@ -69,8 +69,10 @@ jobs:
             -var="aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" \
             -var="environment=${{ vars.ENVIRONMENT }}" \
             -var="dockerhub_username=${{ secrets.DOCKERHUB_USERNAME }}" \
-            -var="vehicle_service_image_name=${{ secrets.VEHICLE_SERVICE_IMAGE_NAME }}" \
-            -var="vehicle_service_image_tag=${{ secrets.VEHICLE_SERVICE_IMAGE_TAG }}"
+            -var="vehicle_service_image_name=${{ vars.VEHICLE_SERVICE_IMAGE_NAME }}" \
+            -var="vehicle_service_image_tag=${{ vars.VEHICLE_SERVICE_IMAGE_TAG }}" \
+            -var="vehicle_payment_image_name=${{ vars.VEHICLE_PAYMENT_IMAGE_NAME }}" \
+            -var="vehicle_payment_image_tag=${{ vars.VEHICLE_PAYMENT_IMAGE_TAG }}"
 
   terraform-apply:
     name: Terraform Apply
@@ -106,5 +108,7 @@ jobs:
             -var="aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" \
             -var="environment=${{ vars.ENVIRONMENT }}" \
             -var="dockerhub_username=${{ secrets.DOCKERHUB_USERNAME }}" \
-            -var="vehicle_service_image_name=${{ secrets.VEHICLE_SERVICE_IMAGE_NAME }}" \
-            -var="vehicle_service_image_tag=${{ secrets.VEHICLE_SERVICE_IMAGE_TAG }}"
+            -var="vehicle_service_image_name=${{ vars.VEHICLE_SERVICE_IMAGE_NAME }}" \
+            -var="vehicle_service_image_tag=${{ vars.VEHICLE_SERVICE_IMAGE_TAG }}" \
+            -var="vehicle_payment_image_name=${{ vars.VEHICLE_PAYMENT_IMAGE_NAME }}" \
+            -var="vehicle_payment_image_tag=${{ vars.VEHICLE_PAYMENT_IMAGE_TAG }}"

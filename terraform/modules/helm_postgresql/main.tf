@@ -27,25 +27,25 @@ resource "helm_release" "default" {
   create_namespace = true
 
   set = [
-  {
-    name  = "auth.username"
-    value = random_uuid.normal_username.result
-  },
-  {
-    name  = "auth.password"
-    value = random_password.normal_password.result
-  },
-  {
-    name  = "auth.postgresPassword"
-    value = random_password.admin_password.result
-  },
-  {
-    name  = "auth.database"
-    value = var.database_name
-  },
-  {
-    name  = "primary.persistence.size"
-    value = "${var.database_size}Gi"
-  }
+    {
+      name  = "auth.username"
+      value = random_uuid.normal_username.result
+    },
+    {
+      name  = "auth.password"
+      value = random_password.normal_password.result
+    },
+    {
+      name  = "auth.postgresPassword"
+      value = random_password.admin_password.result
+    },
+    {
+      name  = "auth.database"
+      value = var.database_name
+    },
+    {
+      name  = "primary.persistence.size"
+      value = "${var.database_size}Gi"
+    }
   ]
 }

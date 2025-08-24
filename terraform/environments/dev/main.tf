@@ -36,3 +36,24 @@ module "vehicle_management_service" {
     }
   }
 }
+
+module "vehicle_payment_service" {
+  source = "../../stacks/az_service_payment_deployment"
+
+  container_image = "${var.dockerhub_username}/${var.vehicle_payment_image_name}:${var.vehicle_payment_image_tag}"
+  environment     = var.environment
+  namespace       = local.app_namespace
+
+  k8s_cluster_kube_config = module.aks_cluster.aks_cluster_config
+
+  container_resources = {
+    requests = {
+      cpu    = "250m"
+      memory = "64Mi"
+    }
+    limits = {
+      cpu    = "1000m"
+      memory = "512Mi"
+    }
+  }
+}
