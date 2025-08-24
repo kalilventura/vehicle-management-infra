@@ -1,0 +1,67 @@
+name: Deploy Infrastructure on Azure
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-quality:
+    name: Terraform quality code
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    defaults:
+      run:
+        working-directory: ./terraform/environments/dev
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.12.2
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Format Check
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+#  terraform-plan:
+#    name: Terraform Plan
+#    runs-on: ubuntu-latest
+#    if: github.event_name == 'pull_request'
+#    needs: [terraform-quality]
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+#
+#      - name: Setup Terraform
+#        uses: hashicorp/setup-terraform@v2
+#        with:
+#          terraform_version: 1.12.2
+#
+#      - name: Terraform Init
+#        id: init
+#        run: terraform init
+#
+#      - name: Login to Azure for Plan
+#        uses: azure/login@v1
+#        with:
+#          creds: ${{ secrets.AZURE_CREDENTIALS }}
+#
+#      - name: Terraform Plan
+#        id: plan
+#        run: terraform plan -input=false
