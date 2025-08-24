@@ -13,8 +13,10 @@ module "app_deployment" {
   source    = "../../modules/k8s_deployment"
   namespace = module.app_namespace.name
 
-  container_image    = var.container_image
-  container_name     = "vehicle-management-service"
+  container_image = var.container_image
+  container_name  = "vehicle-management-service"
+  container_port  = 8080
+
   environment        = var.environment
   is_ingress_enabled = false
   is_service_enabled = true
@@ -25,10 +27,12 @@ module "app_deployment" {
     DB_PORT = module.app_database.database_port
     DB_USER = module.app_database.normal_username
     DB_SSL  = "disable"
+
+    PAYMENTS_API = var.payments_api
+    PORT         = 8080
   }
   secret_data = {
     DB_PASSWORD = module.app_database.normal_password
   }
-
   container_resources = var.container_resources
 }
