@@ -17,5 +17,6 @@ Exceptions are acceptable depending on the circumstances (critical bug fixes tha
 
 ### Added
 
+- added a new step to plan and deploy the infrastructure
 - added a new module to create the resource group and kubernetes in azure environment
 - created the base structure

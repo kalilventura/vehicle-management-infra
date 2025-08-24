@@ -8,9 +8,9 @@ terraform {
       source  = "hashicorp/helm"
       version = ">=2.17.0"
     }
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.95.0"
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>3.0"
     }
     random = {
       source  = "hashicorp/random"
