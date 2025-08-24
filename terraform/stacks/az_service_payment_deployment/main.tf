@@ -6,7 +6,7 @@ module "app_namespace" {
 module "app_database" {
   source        = "../../modules/helm_postgresql"
   namespace     = module.app_namespace.name
-  database_name = "vehicle-management"
+  database_name = "vehicle-payment"
 }
 
 module "app_deployment" {
@@ -14,7 +14,7 @@ module "app_deployment" {
   namespace = module.app_namespace.name
 
   container_image    = var.container_image
-  container_name     = "vehicle-management-service"
+  container_name     = "vehicle-payment-service"
   environment        = var.environment
   is_ingress_enabled = false
   is_service_enabled = true

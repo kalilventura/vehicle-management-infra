@@ -32,3 +32,13 @@ variable "vehicle_service_image_tag" {
   type        = string
   description = "The tag for the Docker image to be deployed."
 }
+
+variable "vehicle_payment_image_name" {
+  type        = string
+  description = "The name of the Docker image."
+}
+
+variable "vehicle_payment_image_tag" {
+  type        = string
+  description = "The tag for the Docker image to be deployed."
+}
