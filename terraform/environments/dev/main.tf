@@ -11,3 +11,28 @@ module "aks_cluster" {
     node_count = 2
   }
 }
+
+locals {
+  app_namespace = "vehicle-management"
+}
+
+module "vehicle_management_service" {
+  source = "../../stacks/az_service_management_deployment"
+
+  container_image = "${var.dockerhub_username}/${var.vehicle_service_image_name}:${var.vehicle_service_image_tag}"
+  environment     = var.environment
+  namespace       = local.app_namespace
+
+  k8s_cluster_kube_config = module.aks_cluster.aks_cluster_config
+
+  container_resources = {
+    requests = {
+      cpu    = "250m"
+      memory = "64Mi"
+    }
+    limits = {
+      cpu    = "1000m"
+      memory = "512Mi"
+    }
+  }
+}

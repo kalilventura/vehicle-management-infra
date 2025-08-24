@@ -13,9 +13,9 @@ variable "aks_cluster_name" {
 
 variable "aks_default_node_pool_configuration" {
   type = object({
-    name = string
+    name       = string
     node_count = number
-    vm_size = string
+    vm_size    = string
   })
   description = "The node pool configuration"
 }
@@ -26,17 +26,17 @@ variable "environment" {
     condition     = length(var.environment) > 0 && contains(["dev", "prod"], var.environment)
     error_message = "The environment must be either 'dev' or 'prod'."
   }
-  description = "The environment for the deployment"
+  description = "The environment for the deployment."
 }
 
 variable "aks_tier" {
-  type = string
-  default = "Free"
+  type        = string
+  default     = "Free"
   description = "The Azure Cluster tier."
 }
 
 variable "aks_cluster_dns_prefix" {
   type        = string
-  default = "soat"
+  default     = "soat"
   description = "The AKS cluster DNS Prefix."
 }

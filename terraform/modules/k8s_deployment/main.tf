@@ -1,14 +1,3 @@
-terraform {
-  required_version = ">= 1.9.3"
-
-  required_providers {
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">=2.35.1"
-    }
-  }
-}
-
 locals {
   app_tier      = "backend"
   prefixed_name = "${var.environment}-${var.container_name}"
@@ -79,26 +68,22 @@ resource "kubernetes_deployment" "default" {
             container_port = var.container_port
           }
 
+          # This block correctly mounts the Secret
           dynamic "env_from" {
             for_each = length(kubernetes_secret.default) > 0 ? [1] : []
             content {
-              dynamic "secret_ref" {
-                for_each = length(kubernetes_secret.default) > 0 ? [1] : []
-                content {
-                  name = kubernetes_secret.default[0].metadata[0].name
-                }
+              secret_ref {
+                name = kubernetes_secret.default[0].metadata[0].name
               }
             }
           }
 
+          # CORRECTED BLOCK: This now correctly mounts the ConfigMap
           dynamic "env_from" {
             for_each = length(kubernetes_config_map.default) > 0 ? [1] : []
             content {
-              dynamic "secret_ref" {
-                for_each = length(kubernetes_config_map.default) > 0 ? [1] : []
-                content {
-                  name = kubernetes_config_map.default[0].metadata[0].name
-                }
+              config_map_ref {
+                name = kubernetes_config_map.default[0].metadata[0].name
               }
             }
           }
