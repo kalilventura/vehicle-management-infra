@@ -1,13 +1,11 @@
 variable "container_image" {
-  type        = string
-}
-
-variable "container_name" {
-  type        = string
+  type = string
+  description = "The container image name."
 }
 
 variable "namespace" {
-  type        = string
+  type = string
+  description = "The application namespace."
 }
 
 variable "container_resources" {
@@ -35,12 +33,12 @@ variable "environment" {
 
 variable "k8s_cluster_kube_config" {
   type = object({
-    host = string
+    host                   = string
     cluster_ca_certificate = string
-    client_certificate = string
-    client_key = string
-    username = string
-    password = string
+    client_certificate     = string
+    client_key             = string
+    username               = string
+    password               = string
   })
   description = "The Kubernetes configuration file to deploy the application."
 }

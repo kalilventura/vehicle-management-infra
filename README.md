@@ -78,7 +78,7 @@ If you want to execute a target module, run:
 To format the terraform configuration files to the standard style, run:
 
    ```bash
-   terraform fmt
+   terraform fmt -recursive
    ```
 
 To validate the configuration files, run:

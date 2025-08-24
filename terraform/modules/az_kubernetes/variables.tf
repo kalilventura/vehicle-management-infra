@@ -29,14 +29,14 @@ variable "environment" {
 
 variable "aks_default_node_pool_configuration" {
   type = object({
-    name = string
+    name       = string
     node_count = number
-    vm_size = string
+    vm_size    = string
   })
   description = "The node pool configuration"
 }
 
 variable "aks_tier" {
-  type = string
+  type        = string
   description = "The Azure Cluster tier."
 }

@@ -1,5 +1,5 @@
 output "aks_cluster_name" {
-  value = azurerm_kubernetes_cluster.default.name
+  value       = azurerm_kubernetes_cluster.default.name
   description = "The AKS Cluster name."
 }
 
