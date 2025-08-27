@@ -31,6 +31,16 @@ variable "environment" {
   description = "The environment for the deployment."
 }
 
+variable "stripe_key" {
+  type        = string
+  description = "The Stripe key to process the payments."
+}
+
+variable "stripe_webhook_key" {
+  type        = string
+  description = "The Stripe webhook key to decode the webhook requests."
+}
+
 variable "k8s_cluster_kube_config" {
   type = object({
     host                   = string

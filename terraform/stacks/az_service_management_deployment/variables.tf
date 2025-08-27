@@ -22,6 +22,11 @@ variable "container_resources" {
   description = "The container resources for the deployment."
 }
 
+variable "payments_api" {
+  type        = string
+  description = "The url to make the HTTP requests."
+}
+
 variable "environment" {
   type = string
   validation {

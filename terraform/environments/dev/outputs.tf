@@ -9,11 +9,11 @@ output "aks_cluster_name" {
 }
 
 output "vehicle_management_service" {
-  value       = module.vehicle_management_service.vehicle_management_service_internal_host
+  value       = module.vehicle_management_service.internal_host
   description = "The host and port of the application to be used in the other applications."
 }
 
 output "vehicle_payment_service" {
-  value       = module.vehicle_payment_service.vehicle_payment_service_internal_host
+  value       = module.vehicle_payment_service.internal_host
   description = "The host and port of the application to be used in the other applications."
 }

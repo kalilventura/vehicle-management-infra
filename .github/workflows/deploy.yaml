@@ -68,11 +68,13 @@ jobs:
             -var="resource_group_name=${{ vars.RESOURCE_GROUP_NAME }}" \
             -var="aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" \
             -var="environment=${{ vars.ENVIRONMENT }}" \
-            -var="dockerhub_username=${{ secrets.DOCKERHUB_USERNAME }}" \
+            -var="dockerhub_username=${{ vars.DOCKERHUB_USERNAME }}" \
             -var="vehicle_service_image_name=${{ vars.VEHICLE_SERVICE_IMAGE_NAME }}" \
             -var="vehicle_service_image_tag=${{ vars.VEHICLE_SERVICE_IMAGE_TAG }}" \
             -var="vehicle_payment_image_name=${{ vars.VEHICLE_PAYMENT_IMAGE_NAME }}" \
-            -var="vehicle_payment_image_tag=${{ vars.VEHICLE_PAYMENT_IMAGE_TAG }}"
+            -var="vehicle_payment_image_tag=${{ vars.VEHICLE_PAYMENT_IMAGE_TAG }}" \
+            -var="stripe_key=${{ secrets.STRIPE_KEY }}" \
+            -var="stripe_webhook_key=${{ secrets.STRIPE_WEBHOOK_KEY }}"
 
   terraform-apply:
     name: Terraform Apply
@@ -107,8 +109,10 @@ jobs:
             -var="resource_group_name=${{ vars.RESOURCE_GROUP_NAME }}" \
             -var="aks_cluster_name=${{ vars.AKS_CLUSTER_NAME }}" \
             -var="environment=${{ vars.ENVIRONMENT }}" \
-            -var="dockerhub_username=${{ secrets.DOCKERHUB_USERNAME }}" \
+            -var="dockerhub_username=${{ vars.DOCKERHUB_USERNAME }}" \
             -var="vehicle_service_image_name=${{ vars.VEHICLE_SERVICE_IMAGE_NAME }}" \
             -var="vehicle_service_image_tag=${{ vars.VEHICLE_SERVICE_IMAGE_TAG }}" \
             -var="vehicle_payment_image_name=${{ vars.VEHICLE_PAYMENT_IMAGE_NAME }}" \
-            -var="vehicle_payment_image_tag=${{ vars.VEHICLE_PAYMENT_IMAGE_TAG }}"
+            -var="vehicle_payment_image_tag=${{ vars.VEHICLE_PAYMENT_IMAGE_TAG }}" \
+            -var="stripe_key=${{ secrets.STRIPE_KEY }}" \
+            -var="stripe_webhook_key=${{ secrets.STRIPE_WEBHOOK_KEY }}"
