@@ -16,8 +16,9 @@ module "app_deployment" {
   container_image = var.container_image
   container_name  = "vehicle-management-service"
   container_port  = 8080
+  environment     = var.environment
+  service_type    = "LoadBalancer"
 
-  environment        = var.environment
   is_ingress_enabled = false
   is_service_enabled = true
 

@@ -43,7 +43,7 @@ variable "dockerhub_username" {
 
 variable "vehicle_service_image_name" {
   type        = string
-  description = "The name of the vehicle service's Docker image repository on Docker Hub (e.g., 'your-username/vehicle-service')."
+  description = "The name of the vehicle service's Docker image repository on Docker Hub (e.g., 'vehicle-service')."
 
   validation {
     condition     = length(var.vehicle_service_image_name) > 0
@@ -63,7 +63,7 @@ variable "vehicle_service_image_tag" {
 
 variable "vehicle_payment_image_name" {
   type        = string
-  description = "The name of the vehicle payment service's Docker image repository on Docker Hub (e.g., 'your-username/payment-service')."
+  description = "The name of the vehicle payment service's Docker image repository on Docker Hub (e.g., 'payment-service')."
 
   validation {
     condition     = length(var.vehicle_payment_image_name) > 0

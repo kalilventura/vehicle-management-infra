@@ -25,6 +25,10 @@ resource "helm_release" "default" {
 
   namespace        = var.namespace
   create_namespace = true
+  cleanup_on_fail  = true
+  atomic           = true
+  wait             = true
+  wait_for_jobs    = true
 
   set = [
     {

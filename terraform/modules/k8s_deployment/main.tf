@@ -121,7 +121,7 @@ resource "kubernetes_service" "default" {
 }
 
 resource "kubernetes_ingress_v1" "default" {
-  count = var.is_ingress_enabled ? 1 : 0
+  count = var.is_ingress_enabled && var.ingress_hostname != null ? 1 : 0
 
   metadata {
     name      = "${local.prefixed_name}-http-ingress"
@@ -134,15 +134,16 @@ resource "kubernetes_ingress_v1" "default" {
 
   spec {
     rule {
+      host = var.ingress_hostname
+
       http {
         path {
           # Traffic to / will be forwarded to your service
           path      = "/"
           path_type = "Prefix"
-
           backend {
             service {
-              name = local.prefixed_name
+              name = kubernetes_service.default[0].metadata[0].name
               port {
                 number = 80
               }
@@ -154,7 +155,6 @@ resource "kubernetes_ingress_v1" "default" {
   }
 
   depends_on = [
-    kubernetes_deployment.default,
     kubernetes_service.default,
   ]
 }
