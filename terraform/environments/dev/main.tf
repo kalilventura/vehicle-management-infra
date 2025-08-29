@@ -12,17 +12,15 @@ module "aks_cluster" {
   }
 }
 
-locals {
-  app_namespace = "vehicle-management"
-}
+module "vehicle_payment_service" {
+  source = "../../stacks/az_service_payment_deployment"
 
-module "vehicle_management_service" {
-  source = "../../stacks/az_service_management_deployment"
+  container_image    = "${var.dockerhub_username}/${var.vehicle_payment_image_name}:${var.vehicle_payment_image_tag}"
+  environment        = var.environment
+  namespace          = "vehicle-payment"
+  stripe_key         = var.stripe_key
+  stripe_webhook_key = var.stripe_webhook_key
 
-  container_image         = "${var.dockerhub_username}/${var.vehicle_service_image_name}:${var.vehicle_service_image_tag}"
-  environment             = var.environment
-  namespace               = local.app_namespace
-  payments_api            = module.vehicle_payment_service.internal_host
   k8s_cluster_kube_config = module.aks_cluster.aks_cluster_config
 
   container_resources = {
@@ -37,15 +35,13 @@ module "vehicle_management_service" {
   }
 }
 
-module "vehicle_payment_service" {
-  source = "../../stacks/az_service_payment_deployment"
+module "vehicle_management_service" {
+  source = "../../stacks/az_service_management_deployment"
 
-  container_image    = "${var.dockerhub_username}/${var.vehicle_payment_image_name}:${var.vehicle_payment_image_tag}"
-  environment        = var.environment
-  namespace          = local.app_namespace
-  stripe_key         = var.stripe_key
-  stripe_webhook_key = var.stripe_webhook_key
-
+  container_image         = "${var.dockerhub_username}/${var.vehicle_service_image_name}:${var.vehicle_service_image_tag}"
+  environment             = var.environment
+  namespace               = "vehicle-management"
+  payments_api            = module.vehicle_payment_service.internal_host
   k8s_cluster_kube_config = module.aks_cluster.aks_cluster_config
 
   container_resources = {

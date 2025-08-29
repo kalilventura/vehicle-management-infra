@@ -17,6 +17,7 @@ module "app_deployment" {
   container_name  = "vehicle-payment-service"
   container_port  = 8080
   environment     = var.environment
+  service_type    = "LoadBalancer"
 
   is_ingress_enabled = false
   is_service_enabled = true
