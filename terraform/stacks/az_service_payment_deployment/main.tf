@@ -29,7 +29,7 @@ module "app_deployment" {
     DB_USER = module.app_database.normal_username
     DB_SSL  = "disable"
 
-    PORT = 8080
+    APP_PORT = 8080
   }
   secret_data = {
     DB_PASSWORD        = module.app_database.normal_password
