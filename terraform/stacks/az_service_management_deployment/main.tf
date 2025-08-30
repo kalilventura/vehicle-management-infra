@@ -30,7 +30,7 @@ module "app_deployment" {
     DB_SSL  = "disable"
 
     PAYMENTS_API = var.payments_api
-    PORT         = 8080
+    APP_PORT     = 8080
   }
   secret_data = {
     DB_PASSWORD = module.app_database.normal_password
